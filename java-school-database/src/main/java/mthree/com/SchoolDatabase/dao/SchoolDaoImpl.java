@@ -88,6 +88,7 @@ public class SchoolDaoImpl implements SchoolDao {
         // Need to add in the sid for Robert Dylan.  Use sid: 123
         // YOUR CODE STARTS HERE
 
+         //must give val for sid
         String sql = "INSERT into student (sid,fName,lName) VALUES (123,'Robert','Dylan')";
 
         // YOUR CODE ENDS HERE

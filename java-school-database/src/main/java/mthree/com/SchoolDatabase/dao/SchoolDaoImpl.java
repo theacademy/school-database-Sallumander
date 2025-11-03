@@ -36,7 +36,7 @@ public class SchoolDaoImpl implements SchoolDao {
         // sorted by last name.
         // YOUR CODE STARTS HERE
 
-        String sql = "";
+        String sql = "SELECT fName, lName FROM student ORDER BY lName ASC";
 
         // YOUR CODE ENDS HERE
 
@@ -49,7 +49,7 @@ public class SchoolDaoImpl implements SchoolDao {
         // for all courses in the Computer Science department.
         // YOUR CODE STARTS HERE
 
-         String sql = "";
+         String sql = "SELECT c.courseCode, c.courseDesc FROM course AS c join teacher as t on c.teacherId=t.tid where t.dept=Computer Science";
 
         // YOUR CODE ENDS HERE
         return jdbcTemplate.query(sql, new CourseMapper());
@@ -61,7 +61,7 @@ public class SchoolDaoImpl implements SchoolDao {
         //  Name the aggregate field `teacherCount`.
         // YOUR CODE STARTS HERE
 
-        String sql = "";
+        String sql = "select dept, count(tid) as teacherCount From Group BY dept";
 
         // YOUR CODE ENDS HERE
         return jdbcTemplate.query(sql, new TeacherCountMapper());
@@ -74,7 +74,7 @@ public class SchoolDaoImpl implements SchoolDao {
         // Name the aggregate field `numStudents`.
         // YOUR CODE STARTS HERE
 
-        String sql = "";
+        String sql = "Select c.courseCode, c.courseDesc, Count(s.sid) as numberOfStudents From course as c join course_Student as c_s on c.cid=c_s.course_id join student as s on c_s.student_id=s.sid group by c.cid";
 
         // YOUR CODE ENDS HERE
         return jdbcTemplate.query(sql, new StudentCountMapper());
@@ -88,7 +88,7 @@ public class SchoolDaoImpl implements SchoolDao {
         // Need to add in the sid for Robert Dylan.  Use sid: 123
         // YOUR CODE STARTS HERE
 
-        String sql = "";
+        String sql = "INSERT into student (fName,lName) VALUES ('Robert','Dylan')";
 
         // YOUR CODE ENDS HERE
          System.out.println(jdbcTemplate.update(sql));
@@ -101,7 +101,7 @@ public class SchoolDaoImpl implements SchoolDao {
         // You will need to include a sid in your query.  Use 123
         // YOUR CODE STARTS HERE
 
-        String sql = "";
+        String sql = "insert into course_student(student_id,course_id) select s.sid,c.cid from student s join course c on c.courseCode='CS148' where s.fName='Robert' and s.lName='Dylan'";
 
         // YOUR CODE ENDS HERE
         jdbcTemplate.update(sql);
@@ -112,7 +112,7 @@ public class SchoolDaoImpl implements SchoolDao {
         // Write a query to change the course description for course CS305 to "Advanced Python with Flask".
         // YOUR CODE STARTS HERE
 
-        String sql = "";
+        String sql = "update course SET courseDesc ='Advanced Python with Flask' Where courseCode='CS305'";
 
         // YOUR CODE ENDS HERE
         jdbcTemplate.update(sql);
@@ -123,7 +123,7 @@ public class SchoolDaoImpl implements SchoolDao {
         // Write a query to remove David Mitchell as a teacher.
         // YOUR CODE STARTS HERE
 
-        String sql = "";
+        String sql = "DELETE FROM teacher where tFName='David' and tLName='Mitchell'";
 
         // YOUR CODE ENDS HERE
         jdbcTemplate.update(sql);
